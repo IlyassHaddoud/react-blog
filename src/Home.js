@@ -3,31 +3,37 @@ import BlogList from "./BlogList";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-  const handleDelete = (id) => {
-    const newblogs = blogs.filter((blog) => {
-      return blog.id !== id;
-    });
-    setBlogs(newblogs);
-  };
+  const [blogs, setBlogs] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
       fetch("http://localhost:8000/blogs")
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("Could not the ressources from server");
+          }
+          return res.json();
+        })
         .then((data) => {
           setBlogs(data);
           setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setIsPending(false);
         });
-    }, 1000);
+    }, 500);
   }, []);
 
-  const [blogs, setBlogs] = useState(null);
-  const [isPending, setIsPending] = useState(true);
   return (
     <div className="home">
       <h1>All blogs</h1>
+      {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
-      {blogs && <BlogList blogs={blogs} handleDelete={handleDelete} />}
+      {blogs && <BlogList blogs={blogs} />}
     </div>
   );
 };
