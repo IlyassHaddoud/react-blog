@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 .header {
@@ -11,16 +12,49 @@
   justify-content: space-between;
   align-items: center;
   width: 80%;
-  height: 100px;
+  height: 50px;
   margin: auto;
+  margin-bottom: 30px;
+  padding: 15px;
+}
+
+.logo {
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .list {
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  width: 15%;
 }
 
 li {
   list-style: none;
+  cursor: pointer;
+}
+
+.home {
+  width: 80%;
+  margin: auto;
+  padding: 15px;
+}
+
+.blog-list {
+  margin: 20px;
+  padding: 10px;
+}
+
+.blog-previous {
+  margin: 20px;
+}
+
+button {
+  padding: 5px;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  margin-top: 10px;
 }
